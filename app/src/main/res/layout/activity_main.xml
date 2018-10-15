@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/tvResult"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:textAlignment="textEnd"
+        android:textColor="#000000"
+        android:textSize="48sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvTempResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvResult" />
+
+    <TableLayout
+        android:id="@+id/tlNumbersAndActions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/bBackspace"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/backspace" />
+
+            <Button
+                android:id="@+id/bClear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/clear" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/bOne"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/one" />
+
+            <Button
+                android:id="@+id/bTwo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/two" />
+
+            <Button
+                android:id="@+id/bThree"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/three" />
+
+            <Button
+                android:id="@+id/bSum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sum" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/bFour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/four" />
+
+            <Button
+                android:id="@+id/bFive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/five" />
+
+            <Button
+                android:id="@+id/bSix"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/six" />
+
+            <Button
+                android:id="@+id/bDifference"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/difference" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/bSeven"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/seven" />
+
+            <Button
+                android:id="@+id/bEight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/eight" />
+
+            <Button
+                android:id="@+id/bNine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/nine" />
+
+            <Button
+                android:id="@+id/bDivision"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/division" />
+        </TableRow>
+
+        <TableRow>
+
+            <Button
+                android:id="@+id/bZero"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/zero" />
+
+            <Button
+                android:id="@+id/bDot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dot" />
+
+            <Button
+                android:id="@+id/bResult"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/result" />
+
+            <Button
+                android:id="@+id/bMultiply"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/multiply" />
+        </TableRow>
+
+    </TableLayout>
+
+</android.support.constraint.ConstraintLayout>
