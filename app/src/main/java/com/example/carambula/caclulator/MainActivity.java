@@ -176,7 +176,7 @@ public class MainActivity extends AppCompatActivity implements IMainActivity, Vi
                 }
                 break;
             case R.id.bResult:
-                presenter.result();
+                presenter.result(tvResult.getText().toString());
                 break;
         }
     }
