@@ -11,6 +11,7 @@ public class MainActivityPresenter {
     private boolean lastActionIsDifference;
     private boolean lastActionIsMultiply;
     private boolean lastActionIsDivision;
+    private boolean lastActionIsResult;
 
 
     public MainActivityPresenter(IMainActivity activity) {
@@ -47,10 +48,16 @@ public class MainActivityPresenter {
                             activity.setResult("");
                             activity.setTempResult("= " + String.valueOf(currentTempResult));
                         } else {
-                            currentResult += Double.valueOf(currentNumber);
-                            currentTempResult = currentResult;
-                            activity.setResult("");
-                            activity.setTempResult("= " + String.valueOf(currentTempResult));
+                            if (lastActionIsResult) {
+                                currentTempResult = currentResult;
+                                activity.setResult("");
+                                activity.setTempResult("= " + String.valueOf(currentTempResult));
+                            } else {
+                                currentResult += Double.valueOf(currentNumber);
+                                currentTempResult = currentResult;
+                                activity.setResult("");
+                                activity.setTempResult("= " + String.valueOf(currentTempResult));
+                            }
                         }
                     }
                 }
@@ -59,6 +66,7 @@ public class MainActivityPresenter {
             lastActionIsDifference = false;
             lastActionIsDivision = false;
             lastActionIsMultiply = false;
+            lastActionIsResult = false;
         }
     }
 
@@ -89,10 +97,16 @@ public class MainActivityPresenter {
                             activity.setResult("");
                             activity.setTempResult("= " + String.valueOf(currentTempResult));
                         } else {
-                            currentResult += Double.valueOf(currentNumber);
-                            currentTempResult = currentResult;
-                            activity.setResult("");
-                            activity.setTempResult("= " + String.valueOf(currentTempResult));
+                            if (lastActionIsResult) {
+                                currentTempResult = currentResult;
+                                activity.setResult("");
+                                activity.setTempResult("= " + String.valueOf(currentTempResult));
+                            } else {
+                                currentResult += Double.valueOf(currentNumber);
+                                currentTempResult = currentResult;
+                                activity.setResult("");
+                                activity.setTempResult("= " + String.valueOf(currentTempResult));
+                            }
                         }
                     }
                 }
@@ -101,6 +115,7 @@ public class MainActivityPresenter {
             lastActionIsSum = false;
             lastActionIsDifference = false;
             lastActionIsMultiply = false;
+            lastActionIsResult = false;
         }
     }
 
@@ -138,10 +153,16 @@ public class MainActivityPresenter {
                             activity.setResult("");
                             activity.setTempResult("= " + String.valueOf(currentTempResult));
                         } else {
-                            currentResult += Double.valueOf(currentNumber);
-                            currentTempResult = currentResult;
-                            activity.setResult("");
-                            activity.setTempResult("= " + String.valueOf(currentTempResult));
+                            if (lastActionIsResult) {
+                                currentTempResult = currentResult;
+                                activity.setResult("");
+                                activity.setTempResult("= " + String.valueOf(currentTempResult));
+                            } else {
+                                currentResult += Double.valueOf(currentNumber);
+                                currentTempResult = currentResult;
+                                activity.setResult("");
+                                activity.setTempResult("= " + String.valueOf(currentTempResult));
+                            }
                         }
                     }
                 }
@@ -150,6 +171,7 @@ public class MainActivityPresenter {
             lastActionIsDivision = false;
             lastActionIsSum = false;
             lastActionIsMultiply = false;
+            lastActionIsResult = false;
         }
     }
 
@@ -180,10 +202,16 @@ public class MainActivityPresenter {
                             activity.setResult("");
                             activity.setTempResult("= " + String.valueOf(currentTempResult));
                         } else {
-                            currentResult += Double.valueOf(currentNumber);
-                            currentTempResult = currentResult;
-                            activity.setResult("");
-                            activity.setTempResult("= " + String.valueOf(currentTempResult));
+                            if (lastActionIsResult) {
+                                currentTempResult = currentResult;
+                                activity.setResult("");
+                                activity.setTempResult("= " + String.valueOf(currentTempResult));
+                            } else {
+                                currentResult += Double.valueOf(currentNumber);
+                                currentTempResult = currentResult;
+                                activity.setResult("");
+                                activity.setTempResult("= " + String.valueOf(currentTempResult));
+                            }
                         }
                     }
                 }
@@ -192,6 +220,7 @@ public class MainActivityPresenter {
             lastActionIsDifference = false;
             lastActionIsDivision = false;
             lastActionIsSum = false;
+            lastActionIsResult = false;
         }
     }
 
@@ -250,11 +279,11 @@ public class MainActivityPresenter {
         }
         activity.setResult(String.valueOf(currentTempResult));
         activity.setTempResult("");
+        lastActionIsResult = true;
         lastActionIsMultiply = false;
         lastActionIsDifference = false;
         lastActionIsDivision = false;
         lastActionIsSum = false;
-
     }
 }
 
