@@ -36,7 +36,6 @@ public class MainActivityPresenter {
 
 
     public MainActivityPresenter(IMainActivity activity) {
-        // Log.wtf("myTag", Utils.trace(Thread.currentThread().getStackTrace()));
         this.activity = activity;
         currentTempResult = 0;
         operation = Operation.SUM;
@@ -47,18 +46,21 @@ public class MainActivityPresenter {
         if (!currentNumber.equals("") && !currentNumber.equals(".")) {
             Log.wtf("myTAG", "currentTempResult = " + currentTempResult);
             sbTempResult.append(currentNumber).append(" + ");
+            Log.wtf("myTAG", "" + currentTempResult + "   " + currentNumber);
             currentTempResult = operation.action(currentTempResult, Double.valueOf(currentNumber));
+            Log.wtf("myTAG", "" + currentTempResult + "   " + currentNumber);
             updateUI(sbTempResult.toString(), "");
             operation = Operation.SUM;
         }
     }
 
     public void division(String currentNumber) {
-        // Log.wtf("myTag", Utils.trace(Thread.currentThread().getStackTrace()));
         if (!currentNumber.equals("") && !currentNumber.equals(".")) {
             Log.wtf("myTAG", "currentTempResult = " + currentTempResult);
             sbTempResult.append(currentNumber).append(" / ");
+            Log.wtf("myTAG", "" + currentTempResult + "   " + currentNumber);
             currentTempResult = operation.action(currentTempResult, Double.valueOf(currentNumber));
+            Log.wtf("myTAG", "" + currentTempResult + "   " + currentNumber);
             updateUI(sbTempResult.toString(), "");
             operation = Operation.DIVISION;
         }
@@ -67,7 +69,7 @@ public class MainActivityPresenter {
     public void difference(String currentNumber) {
         if (!currentNumber.equals("") && !currentNumber.equals(".")) {
             Log.wtf("myTAG", "currentTempResult = " + currentTempResult);
-            sbTempResult.append(currentNumber).append(" / ");
+            sbTempResult.append(currentNumber).append(" - ");
             currentTempResult = operation.action(currentTempResult, Double.valueOf(currentNumber));
             updateUI(sbTempResult.toString(), "");
             operation = Operation.DIFFERENCE;
@@ -77,7 +79,7 @@ public class MainActivityPresenter {
     public void multiply(String currentNumber) {
         if (!currentNumber.equals("") && !currentNumber.equals(".")) {
             Log.wtf("myTAG", "currentTempResult = " + currentTempResult);
-            sbTempResult.append(currentNumber).append(" / ");
+            sbTempResult.append(currentNumber).append(" * ");
             currentTempResult = operation.action(currentTempResult, Double.valueOf(currentNumber));
             updateUI(sbTempResult.toString(), "");
             operation = Operation.MULTIPLY;
@@ -92,7 +94,6 @@ public class MainActivityPresenter {
     }
 
     public void clear() {
-        // Log.wtf("myTag", Utils.trace(Thread.currentThread().getStackTrace()));
         sbTempResult = new StringBuilder();
         activity.setResult("");
         activity.setTempResult("");
@@ -100,11 +101,12 @@ public class MainActivityPresenter {
     }
 
     public void result(String currentNumber) {
-        if (!currentNumber.equals(".")) {
+        if (!currentNumber.equals("") && !currentNumber.equals(".")) {
             Log.wtf("myTAG", "" + currentTempResult + "   " + currentNumber);
             currentTempResult = operation.action(currentTempResult, Double.valueOf(currentNumber));
             sbTempResult.append(currentNumber + " = " + currentTempResult);
-            updateUI(sbTempResult.toString(), String.valueOf(currentTempResult - (int) currentTempResult < 0.00000000001 ? (int) currentTempResult : currentTempResult));
+            operation = operation.SUM;
+            updateUI(sbTempResult.toString(), String.valueOf(currentTempResult - (int) currentTempResult < 0.00001 ? (int) currentTempResult : currentTempResult));
         }
     }
 
