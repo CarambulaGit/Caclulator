@@ -13,7 +13,6 @@ import static android.view.ViewDebug.trace;
 public class MainActivity extends AppCompatActivity implements IMainActivity, View.OnClickListener {
     private TextView tvResult;
     private TextView tvTempResult;
-    private Switch sTypeEngineering;
     private Button bBackspace;
     private Button bClear;
 
@@ -72,14 +71,12 @@ public class MainActivity extends AppCompatActivity implements IMainActivity, Vi
         bDot.setOnClickListener(this);
         bResult.setOnClickListener(this);
         bMultiply.setOnClickListener(this);
-        sTypeEngineering.setOnClickListener(this);
     }
 
 
     private void initViewElements() {
         tvResult = findViewById(R.id.tvResult);
         tvTempResult = findViewById(R.id.tvTempResult);
-        sTypeEngineering = findViewById(R.id.sTypeEngineering);
         bBackspace = findViewById(R.id.bBackspace);
         bClear = findViewById(R.id.bClear);
         bOne = findViewById(R.id.bOne);
@@ -191,17 +188,12 @@ public class MainActivity extends AppCompatActivity implements IMainActivity, Vi
                     isResult = false;
                 }
                 if (tvResult.getText().toString().contains(".")) return;
-                if (checkIfDouble(textOnFieldOfResult) == false) {
                     tvResult.setText(tvResult.getText() + ".");
-                    checkIfDouble = true;
-                }
                 break;
             case R.id.bResult:
                 presenter.result(tvResult.getText().toString());
                 isResult = true;
                 break;
-            case R.id.sTypeEngineering:
-                setContentView(R.layout.advanced_caclulator);
         }
     }
 
@@ -215,22 +207,5 @@ public class MainActivity extends AppCompatActivity implements IMainActivity, Vi
         } else {
             tvResult.setText(tvResult.getText() + number);
         }
-    }
-
-
-    private boolean checkIfDouble(String string) {
-        for (int i = 0; i < string.length(); i++) {
-            Log.wtf("Check_symbol", String.valueOf(textOnFieldOfResult.charAt(i)));
-            /*switch (textOnFieldOfResult.charAt(i)) {
-                case '.':
-                    checkIfDouble = true;
-                    break;
-                default:
-                    checkIfDouble = false;
-            }*/
-            if (textOnFieldOfResult.charAt(i) == '.') checkIfDouble = true;
-        }
-        Log.wtf("Check", String.valueOf(checkIfDouble));
-        return checkIfDouble;
     }
 }
