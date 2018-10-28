@@ -16,6 +16,13 @@
     <string name="three">3</string>
     <string name="two">2</string>
     <string name="one">1</string>
-    <string name="clear">AC</string>
-    <string name="backspace">←</string>
+    <string name="type">type</string>
+    <string name="clear">C</string>
+    <string name="backspace">⌫</string>
+    <string name="signChanger">±</string>
+    <string name="removeCurrentNumber">CE</string>
+    <string name="radical">√</string>
+    <string name="square">ꭕ²</string>
+    <string name="reverse">1/x</string>
+
 </resources>
