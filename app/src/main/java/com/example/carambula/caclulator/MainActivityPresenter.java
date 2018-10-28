@@ -12,6 +12,7 @@ public class MainActivityPresenter {
     private boolean lastActionIsMultiply;
     private boolean lastActionIsDivision;
     private boolean lastActionIsResult;
+    private StringBuilder sbTempResult;
 
 
     public MainActivityPresenter(IMainActivity activity) {
@@ -19,56 +20,64 @@ public class MainActivityPresenter {
         this.activity = activity;
         currentResult = 0;
         currentTempResult = 0;
+        sbTempResult = new StringBuilder();
     }
 
     public void sum(String currentNumber) {
-        // Log.wtf("myTag", Utils.trace(Thread.currentThread().getStackTrace()));
-        if (!currentNumber.equals("") && !currentNumber.equals(".")) {
-            if (lastActionIsMultiply) {
-                currentResult *= Double.valueOf(currentNumber);
-                currentTempResult = currentResult;
-                activity.setResult("");
-                activity.setTempResult("= " + String.valueOf(currentTempResult));
-            } else {
-                if (lastActionIsDifference) {
-                    currentResult -= Double.valueOf(currentNumber);
-                    currentTempResult = currentResult;
-                    activity.setResult("");
-                    activity.setTempResult("= " + String.valueOf(currentTempResult));
-                } else {
-                    if (lastActionIsSum) {
-                        currentResult += Double.valueOf(currentNumber);
-                        currentTempResult = currentResult;
-                        activity.setResult("");
-                        activity.setTempResult("= " + String.valueOf(currentTempResult));
-                    } else {
-                        if (lastActionIsDivision) {
-                            currentResult /= Double.valueOf(currentNumber);
-                            currentTempResult = currentResult;
-                            activity.setResult("");
-                            activity.setTempResult("= " + String.valueOf(currentTempResult));
-                        } else {
-                            if (lastActionIsResult) {
-                                currentTempResult = currentResult;
-                                activity.setResult("");
-                                activity.setTempResult("= " + String.valueOf(currentTempResult));
-                            } else {
-                                currentResult += Double.valueOf(currentNumber);
-                                currentTempResult = currentResult;
-                                activity.setResult("");
-                                activity.setTempResult("= " + String.valueOf(currentTempResult));
-                            }
-                        }
-                    }
-                }
-            }
-            lastActionIsSum = true;
-            lastActionIsDifference = false;
-            lastActionIsDivision = false;
-            lastActionIsMultiply = false;
-            lastActionIsResult = false;
-        }
+        Log.wtf("myTAG", "currentTempResult = " + currentTempResult);
+        sbTempResult.append(currentNumber).append(" + ");
+        currentTempResult += Double.valueOf(currentNumber);
+        updateUI(sbTempResult.toString(), "");
     }
+
+//    public void sum(String currentNumber) {
+//        // Log.wtf("myTag", Utils.trace(Thread.currentThread().getStackTrace()));
+//        if (!currentNumber.equals("") && !currentNumber.equals(".")) {
+//            if (lastActionIsMultiply) {
+//                currentResult *= Double.valueOf(currentNumber);
+//                currentTempResult = currentResult;
+//                activity.setResult("");
+//                activity.setTempResult("= " + String.valueOf(currentTempResult));
+//            } else {
+//                if (lastActionIsDifference) {
+//                    currentResult -= Double.valueOf(currentNumber);
+//                    currentTempResult = currentResult;
+//                    activity.setResult("");
+//                    activity.setTempResult("= " + String.valueOf(currentTempResult));
+//                } else {
+//                    if (lastActionIsSum) {
+//                        currentResult += Double.valueOf(currentNumber);
+//                        currentTempResult = currentResult;
+//                        activity.setResult("");
+//                        activity.setTempResult("= " + String.valueOf(currentTempResult));
+//                    } else {
+//                        if (lastActionIsDivision) {
+//                            currentResult /= Double.valueOf(currentNumber);
+//                            currentTempResult = currentResult;
+//                            activity.setResult("");
+//                            activity.setTempResult("= " + String.valueOf(currentTempResult));
+//                        } else {
+//                            if (lastActionIsResult) {
+//                                currentTempResult = currentResult;
+//                                activity.setResult("");
+//                                activity.setTempResult("= " + String.valueOf(currentTempResult));
+//                            } else {
+//                                currentResult += Double.valueOf(currentNumber);
+//                                currentTempResult = currentResult;
+//                                activity.setResult("");
+//                                activity.setTempResult("= " + String.valueOf(currentTempResult));
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//            lastActionIsSum = true;
+//            lastActionIsDifference = false;
+//            lastActionIsDivision = false;
+//            lastActionIsMultiply = false;
+//            lastActionIsResult = false;
+//        }
+//    }
 
     public void division(String currentNumber) {
         // Log.wtf("myTag", Utils.trace(Thread.currentThread().getStackTrace()));
@@ -233,8 +242,7 @@ public class MainActivityPresenter {
 
     public void clear() {
         // Log.wtf("myTag", Utils.trace(Thread.currentThread().getStackTrace()));
-        activity.setResult("");
-        activity.setTempResult("0");
+        sbTempResult = new StringBuilder();
         currentResult = 0;
         currentTempResult = 0;
         lastActionIsMultiply = false;
@@ -244,47 +252,59 @@ public class MainActivityPresenter {
     }
 
     public void result(String currentNumber) {
-        Log.wtf("myTag", String.valueOf(lastActionIsDivision) + " division");
-        Log.wtf("myTag", String.valueOf(lastActionIsDifference) + " difference");
-        Log.wtf("myTag", String.valueOf(lastActionIsMultiply) + " multiply");
-        Log.wtf("myTag", String.valueOf(lastActionIsSum) + " sum");
-        if (!currentNumber.equals("") && !currentNumber.equals(".")) {
-            if (lastActionIsSum) {
-                currentResult += Double.valueOf(currentNumber);
-                currentTempResult = currentResult;
-                activity.setResult("");
-                activity.setTempResult("= " + String.valueOf(currentTempResult));
-            } else {
-                if (lastActionIsDivision) {
-                    currentResult /= Double.valueOf(currentNumber);
-                    currentTempResult = currentResult;
-                    activity.setResult("");
-                    activity.setTempResult("= " + String.valueOf(currentTempResult));
-                } else {
-                    if (lastActionIsDifference) {
-                        currentResult -= Double.valueOf(currentNumber);
-                        currentTempResult = currentResult;
-                        activity.setResult("");
-                        activity.setTempResult("= " + String.valueOf(currentTempResult));
-                    } else {
-                        if (lastActionIsMultiply) {
-                            currentResult *= Double.valueOf(currentNumber);
-                            currentTempResult = currentResult;
-                            activity.setResult("");
-                            activity.setTempResult("= " + String.valueOf(currentTempResult));
-                        }
-                    }
-                }
-            }
-        }
-        activity.setResult(String.valueOf(currentTempResult));
-        activity.setTempResult("");
-        lastActionIsResult = true;
-        lastActionIsMultiply = false;
-        lastActionIsDifference = false;
-        lastActionIsDivision = false;
-        lastActionIsSum = false;
+        sbTempResult.append(currentNumber);
+        currentTempResult += Double.valueOf(currentNumber);
+        updateUI(sbTempResult.toString(), String.valueOf(currentTempResult - (int) currentTempResult < 0.00000000001 ? (int) currentTempResult : currentTempResult));
     }
+
+    private void updateUI(String tempResult, String result) {
+        activity.setTempResult(tempResult);
+        activity.setResult(result);
+    }
+
+
+//    public void result(String currentNumber) {
+//        Log.wtf("myTag", String.valueOf(lastActionIsDivision) + " division");
+//        Log.wtf("myTag", String.valueOf(lastActionIsDifference) + " difference");
+//        Log.wtf("myTag", String.valueOf(lastActionIsMultiply) + " multiply");
+//        Log.wtf("myTag", String.valueOf(lastActionIsSum) + " sum");
+//        if (!currentNumber.equals("") && !currentNumber.equals(".")) {
+//            if (lastActionIsSum) {
+//                currentResult += Double.valueOf(currentNumber);
+//                currentTempResult = currentResult;
+//                activity.setResult("");
+//                activity.setTempResult("= " + String.valueOf(currentTempResult));
+//            } else {
+//                if (lastActionIsDivision) {
+//                    currentResult /= Double.valueOf(currentNumber);
+//                    currentTempResult = currentResult;
+//                    activity.setResult("");
+//                    activity.setTempResult("= " + String.valueOf(currentTempResult));
+//                } else {
+//                    if (lastActionIsDifference) {
+//                        currentResult -= Double.valueOf(currentNumber);
+//                        currentTempResult = currentResult;
+//                        activity.setResult("");
+//                        activity.setTempResult("= " + String.valueOf(currentTempResult));
+//                    } else {
+//                        if (lastActionIsMultiply) {
+//                            currentResult *= Double.valueOf(currentNumber);
+//                            currentTempResult = currentResult;
+//                            activity.setResult("");
+//                            activity.setTempResult("= " + String.valueOf(currentTempResult));
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//        activity.setResult(String.valueOf(currentTempResult));
+//        activity.setTempResult("");
+//        lastActionIsResult = true;
+//        lastActionIsMultiply = false;
+//        lastActionIsDifference = false;
+//        lastActionIsDivision = false;
+//        lastActionIsSum = false;
+//    }
 }
 
 

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import static android.view.ViewDebug.trace;
@@ -12,6 +13,7 @@ import static android.view.ViewDebug.trace;
 public class MainActivity extends AppCompatActivity implements IMainActivity, View.OnClickListener {
     private TextView tvResult;
     private TextView tvTempResult;
+    private Switch sTypeEngineering;
     private Button bBackspace;
     private Button bClear;
 
@@ -37,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements IMainActivity, Vi
     private MainActivityPresenter presenter;
     private boolean checkIfDouble;
     private String textOnFieldOfResult;
+    private boolean isResult;
 
 
     @Override
@@ -69,12 +72,14 @@ public class MainActivity extends AppCompatActivity implements IMainActivity, Vi
         bDot.setOnClickListener(this);
         bResult.setOnClickListener(this);
         bMultiply.setOnClickListener(this);
+        sTypeEngineering.setOnClickListener(this);
     }
 
 
     private void initViewElements() {
         tvResult = findViewById(R.id.tvResult);
         tvTempResult = findViewById(R.id.tvTempResult);
+        sTypeEngineering = findViewById(R.id.sTypeEngineering);
         bBackspace = findViewById(R.id.bBackspace);
         bClear = findViewById(R.id.bClear);
         bOne = findViewById(R.id.bOne);
@@ -105,6 +110,17 @@ public class MainActivity extends AppCompatActivity implements IMainActivity, Vi
     public void setResult(String result) {
         // Log.wtf("myTag", Utils.trace(Thread.currentThread().getStackTrace()));
         tvResult.setText(result);
+    }
+
+    @Override
+    public void clearResult() {
+        setResult("");
+        setTempResult("");
+    }
+
+    @Override
+    public void log(String log) {
+        Log.wtf("myTAG", log);
     }
 
     @Override
@@ -140,36 +156,41 @@ public class MainActivity extends AppCompatActivity implements IMainActivity, Vi
                 checkIfDouble = false;
                 break;
             case R.id.bOne:
-                tvResult.setText(tvResult.getText() + "1");
+                clickOnNumber("1");
                 break;
             case R.id.bTwo:
-                tvResult.setText(tvResult.getText() + "2");
+                clickOnNumber("2");
                 break;
             case R.id.bThree:
-                tvResult.setText(tvResult.getText() + "3");
+                clickOnNumber("3");
                 break;
             case R.id.bFour:
-                tvResult.setText(tvResult.getText() + "4");
+                clickOnNumber("4");
                 break;
             case R.id.bFive:
-                tvResult.setText(tvResult.getText() + "5");
+                clickOnNumber("5");
                 break;
             case R.id.bSix:
-                tvResult.setText(tvResult.getText() + "6");
+                clickOnNumber("6");
                 break;
             case R.id.bSeven:
-                tvResult.setText(tvResult.getText() + "7");
+                clickOnNumber("7");
                 break;
             case R.id.bEight:
-                tvResult.setText(tvResult.getText() + "8");
+                clickOnNumber("8");
                 break;
             case R.id.bNine:
-                tvResult.setText(tvResult.getText() + "9");
+                clickOnNumber("9");
                 break;
             case R.id.bZero:
-                tvResult.setText(tvResult.getText() + "0");
+                clickOnNumber("0");
                 break;
             case R.id.bDot:
+                if (isResult) {
+                    clearResult();
+                    isResult = false;
+                }
+                if (tvResult.getText().toString().contains(".")) return;
                 if (checkIfDouble(textOnFieldOfResult) == false) {
                     tvResult.setText(tvResult.getText() + ".");
                     checkIfDouble = true;
@@ -177,9 +198,25 @@ public class MainActivity extends AppCompatActivity implements IMainActivity, Vi
                 break;
             case R.id.bResult:
                 presenter.result(tvResult.getText().toString());
+                isResult = true;
                 break;
+            case R.id.sTypeEngineering:
+                setContentView(R.layout.advanced_caclulator);
         }
     }
+
+    private void clickOnNumber(String number) {
+        log("isResult " + isResult);
+        if (isResult) {
+            clearResult();
+            presenter.clear();
+            isResult = false;
+            tvResult.setText(number);
+        } else {
+            tvResult.setText(tvResult.getText() + number);
+        }
+    }
+
 
     private boolean checkIfDouble(String string) {
         for (int i = 0; i < string.length(); i++) {
