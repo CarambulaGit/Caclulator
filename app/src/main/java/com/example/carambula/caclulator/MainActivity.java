@@ -5,21 +5,25 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Switch;
 import android.widget.TextView;
 
-import static android.view.ViewDebug.trace;
 
 public class MainActivity extends AppCompatActivity implements IMainActivity, View.OnClickListener {
     private TextView tvResult;
     private TextView tvTempResult;
     private Button bBackspace;
     private Button bClear;
+    private Button bRemoveCurrentNumber;
 
     private Button bDivision;
     private Button bDifference;
     private Button bMultiply;
     private Button bSum;
+    private Button bPercent;
+    private Button bReverse;
+    private Button bSquare;
+    private Button bRadical;
+    private Button bSignChanger;
 
     private Button bOne;
     private Button bTwo;
@@ -36,8 +40,6 @@ public class MainActivity extends AppCompatActivity implements IMainActivity, Vi
     private Button bResult;
 
     private MainActivityPresenter presenter;
-    private boolean checkIfDouble;
-    private String textOnFieldOfResult;
     private boolean isResult;
 
 
@@ -47,7 +49,6 @@ public class MainActivity extends AppCompatActivity implements IMainActivity, Vi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initViewElements();
-        checkIfDouble = false;
         presenter = new MainActivityPresenter(this);
         addOnClickListenerForButton();
     }
@@ -70,6 +71,12 @@ public class MainActivity extends AppCompatActivity implements IMainActivity, Vi
         bZero.setOnClickListener(this);
         bDot.setOnClickListener(this);
         bResult.setOnClickListener(this);
+        bPercent.setOnClickListener(this);
+        bReverse.setOnClickListener(this);
+        bSquare.setOnClickListener(this);
+        bRadical.setOnClickListener(this);
+        bRemoveCurrentNumber.setOnClickListener(this);
+        bSignChanger.setOnClickListener(this);
         bMultiply.setOnClickListener(this);
     }
 
@@ -79,6 +86,7 @@ public class MainActivity extends AppCompatActivity implements IMainActivity, Vi
         tvTempResult = findViewById(R.id.tvTempResult);
         bBackspace = findViewById(R.id.bBackspace);
         bClear = findViewById(R.id.bClear);
+        bRemoveCurrentNumber = findViewById(R.id.bRemoveCurrentNumber);
         bOne = findViewById(R.id.bOne);
         bTwo = findViewById(R.id.bTwo);
         bThree = findViewById(R.id.bThree);
@@ -95,6 +103,11 @@ public class MainActivity extends AppCompatActivity implements IMainActivity, Vi
         bDot = findViewById(R.id.bDot);
         bResult = findViewById(R.id.bResult);
         bMultiply = findViewById(R.id.bMultiply);
+        bPercent = findViewById(R.id.bPercent);
+        bReverse = findViewById(R.id.bReverse);
+        bSquare = findViewById(R.id.bSquare);
+        bRadical = findViewById(R.id.bRadical);
+        bSignChanger = findViewById(R.id.bSignChanger);
     }
 
     @Override
@@ -122,35 +135,47 @@ public class MainActivity extends AppCompatActivity implements IMainActivity, Vi
 
     @Override
     public void onClick(View v) {
-        textOnFieldOfResult = tvResult.getText().toString();
+        String textOnFieldOfResult = tvResult.getText().toString();
         switch (v.getId()) {
             case R.id.bBackspace:
                 if (textOnFieldOfResult.length() != 0 && textOnFieldOfResult.charAt(tvResult.getText().toString().length() - 1) == '.') {
                     presenter.backspace(tvResult.getText().toString());
-                    checkIfDouble = false;
                 } else {
                     presenter.backspace(tvResult.getText().toString());
                 }
                 break;
             case R.id.bClear:
                 presenter.clear();
-                checkIfDouble = false;
+                break;
+            case R.id.bRemoveCurrentNumber:
+                presenter.remove();
                 break;
             case R.id.bSum:
                 presenter.sum(tvResult.getText().toString());
-                checkIfDouble = false;
                 break;
             case R.id.bDivision:
                 presenter.division(tvResult.getText().toString());
-                checkIfDouble = false;
                 break;
             case R.id.bDifference:
                 presenter.difference(tvResult.getText().toString());
-                checkIfDouble = false;
                 break;
             case R.id.bMultiply:
                 presenter.multiply(tvResult.getText().toString());
-                checkIfDouble = false;
+                break;
+            case R.id.bReverse:
+                presenter.reverse(tvResult.getText().toString());
+                break;
+            case R.id.bSquare:
+                presenter.square(tvResult.getText().toString());
+                break;
+            case R.id.bRadical:
+                presenter.radical(tvResult.getText().toString());
+                break;
+            case R.id.bPercent:
+                presenter.percent(tvResult.getText().toString());
+                break;
+            case R.id.bSignChanger:
+                presenter.signChanger(tvResult.getText().toString());
                 break;
             case R.id.bOne:
                 clickOnNumber("1");
@@ -188,7 +213,7 @@ public class MainActivity extends AppCompatActivity implements IMainActivity, Vi
                     isResult = false;
                 }
                 if (tvResult.getText().toString().contains(".")) return;
-                    tvResult.setText(tvResult.getText() + ".");
+                tvResult.setText(tvResult.getText() + ".");
                 break;
             case R.id.bResult:
                 presenter.result(tvResult.getText().toString());
