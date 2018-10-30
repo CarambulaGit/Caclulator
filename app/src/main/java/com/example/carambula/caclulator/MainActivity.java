@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Switch;
 import android.widget.TextView;
 
 
@@ -45,7 +46,6 @@ public class MainActivity extends AppCompatActivity implements IMainActivity, Vi
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // Log.wtf("myTag", Utils.trace(Thread.currentThread().getStackTrace()));
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initViewElements();
@@ -135,13 +135,12 @@ public class MainActivity extends AppCompatActivity implements IMainActivity, Vi
 
     @Override
     public void onClick(View v) {
-        String textOnFieldOfResult = tvResult.getText().toString();
         switch (v.getId()) {
             case R.id.bBackspace:
-                if (textOnFieldOfResult.length() != 0 && textOnFieldOfResult.charAt(tvResult.getText().toString().length() - 1) == '.') {
+                try {
                     presenter.backspace(tvResult.getText().toString());
-                } else {
-                    presenter.backspace(tvResult.getText().toString());
+                } catch (Exception error) {
+                    isResult = true;
                 }
                 break;
             case R.id.bClear:
@@ -151,31 +150,76 @@ public class MainActivity extends AppCompatActivity implements IMainActivity, Vi
                 presenter.remove();
                 break;
             case R.id.bSum:
-                presenter.sum(tvResult.getText().toString());
+                try {
+                    presenter.sum(tvResult.getText().toString());
+                } catch (Exception error) {
+                    tvResult.setText("Error");
+                    isResult = true;
+                }
                 break;
             case R.id.bDivision:
-                presenter.division(tvResult.getText().toString());
+                try {
+                    presenter.division(tvResult.getText().toString());
+                } catch (Exception error) {
+                    tvResult.setText("Error");
+                    isResult = true;
+                }
                 break;
             case R.id.bDifference:
-                presenter.difference(tvResult.getText().toString());
+                try {
+                    presenter.difference(tvResult.getText().toString());
+                } catch (Exception error) {
+                    tvResult.setText("Error");
+                    isResult = true;
+                }
                 break;
             case R.id.bMultiply:
-                presenter.multiply(tvResult.getText().toString());
+                try {
+                    presenter.multiply(tvResult.getText().toString());
+                } catch (Exception error) {
+                    tvResult.setText("Error");
+                    isResult = true;
+                }
                 break;
             case R.id.bReverse:
-                presenter.reverse(tvResult.getText().toString());
+                try {
+                    presenter.reverse(tvResult.getText().toString());
+                } catch (Exception error) {
+                    tvResult.setText("Error");
+                    isResult = true;
+                }
                 break;
             case R.id.bSquare:
-                presenter.square(tvResult.getText().toString());
+                try {
+                    presenter.square(tvResult.getText().toString());
+                } catch (Exception error) {
+                    tvResult.setText("Error");
+                    isResult = true;
+                }
                 break;
             case R.id.bRadical:
-                presenter.radical(tvResult.getText().toString());
+                try {
+                    presenter.radical(tvResult.getText().toString());
+                } catch (Exception error) {
+                    tvResult.setText("Error");
+                    isResult = true;
+                }
                 break;
             case R.id.bPercent:
-                presenter.percent(tvResult.getText().toString());
+                try {
+                    presenter.percent(tvResult.getText().toString());
+                } catch (Exception error) {
+                    tvResult.setText("Error");
+                    isResult = true;
+                }
                 break;
             case R.id.bSignChanger:
-                presenter.signChanger(tvResult.getText().toString());
+                try {
+                    presenter.signChanger(tvResult.getText().toString());
+                } catch (Exception error) {
+                    tvResult.setText("Error");
+                    isResult = true;
+                }
                 break;
             case R.id.bOne:
                 clickOnNumber("1");
@@ -216,9 +260,14 @@ public class MainActivity extends AppCompatActivity implements IMainActivity, Vi
                 tvResult.setText(tvResult.getText() + ".");
                 break;
             case R.id.bResult:
-                presenter.result(tvResult.getText().toString());
+                try {
+                    presenter.sum(tvResult.getText().toString());
+                } catch (Exception error) {
+                    tvResult.setText("Error");
+                }
                 isResult = true;
                 break;
+
         }
     }
 

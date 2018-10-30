@@ -43,85 +43,57 @@ public class MainActivityPresenter {
     }
 
     public void sum(String currentNumber) {
-        if (!currentNumber.equals("") && !currentNumber.equals(".")) {
-            Log.wtf("myTAG", "currentTempResult = " + currentTempResult);
-            sbTempResult.append(currentNumber).append(" + ");
-            Log.wtf("myTAG", "" + currentTempResult + "   " + currentNumber);
-            currentTempResult = operation.action(currentTempResult, Double.valueOf(currentNumber));
-            Log.wtf("myTAG", "" + currentTempResult + "   " + currentNumber);
-            updateUI(sbTempResult.toString(), "");
-            operation = Operation.SUM;
-        }
+        sbTempResult.append(currentNumber).append(" + ");
+        currentTempResult = operation.action(currentTempResult, Double.valueOf(currentNumber));
+        updateUI(sbTempResult.toString(), "");
+        operation = Operation.SUM;
+
     }
 
     public void division(String currentNumber) {
-        if (!currentNumber.equals("") && !currentNumber.equals(".")) {
-            Log.wtf("myTAG", "currentTempResult = " + currentTempResult);
-            sbTempResult.append(currentNumber).append(" / ");
-            Log.wtf("myTAG", "" + currentTempResult + "   " + currentNumber);
-            currentTempResult = operation.action(currentTempResult, Double.valueOf(currentNumber));
-            Log.wtf("myTAG", "" + currentTempResult + "   " + currentNumber);
-            updateUI(sbTempResult.toString(), "");
-            operation = Operation.DIVISION;
-        }
+        sbTempResult.append(currentNumber).append(" / ");
+        currentTempResult = operation.action(currentTempResult, Double.valueOf(currentNumber));
+        updateUI(sbTempResult.toString(), "");
+        operation = Operation.DIVISION;
     }
 
     public void difference(String currentNumber) {
-        if (!currentNumber.equals("") && !currentNumber.equals(".")) {
-            Log.wtf("myTAG", "currentTempResult = " + currentTempResult);
-            sbTempResult.append(currentNumber).append(" - ");
-            currentTempResult = operation.action(currentTempResult, Double.valueOf(currentNumber));
-            updateUI(sbTempResult.toString(), "");
-            operation = Operation.DIFFERENCE;
-        }
+        sbTempResult.append(currentNumber).append(" - ");
+        currentTempResult = operation.action(currentTempResult, Double.valueOf(currentNumber));
+        updateUI(sbTempResult.toString(), "");
+        operation = Operation.DIFFERENCE;
     }
 
     public void multiply(String currentNumber) {
-        if (!currentNumber.equals("") && !currentNumber.equals(".")) {
-            Log.wtf("myTAG", "currentTempResult = " + currentTempResult);
-            sbTempResult.append(currentNumber).append(" * ");
-            currentTempResult = operation.action(currentTempResult, Double.valueOf(currentNumber));
-            updateUI(sbTempResult.toString(), "");
-            operation = Operation.MULTIPLY;
-        }
+        sbTempResult.append(currentNumber).append(" * ");
+        currentTempResult = operation.action(currentTempResult, Double.valueOf(currentNumber));
+        updateUI(sbTempResult.toString(), "");
+        operation = Operation.MULTIPLY;
     }
 
     public void reverse(String currentNumber) {
-        if (!currentNumber.equals("") && !currentNumber.equals(".")) {
-            updateUI(sbTempResult.toString(), String.valueOf(1 / Double.valueOf(currentNumber)));
-        }
+        updateUI(sbTempResult.toString(), String.valueOf(1 / Double.valueOf(currentNumber)));
     }
 
     public void square(String currentNumber) {
-        if (!currentNumber.equals("") && !currentNumber.equals(".")) {
-            updateUI(sbTempResult.toString(), String.valueOf(Math.pow(Double.valueOf(currentNumber),2)));
-        }
+        updateUI(sbTempResult.toString(), String.valueOf(Math.pow(Double.valueOf(currentNumber), 2)));
     }
 
     public void radical(String currentNumber) {
-        if (!currentNumber.equals("") && !currentNumber.equals(".")) {
-            updateUI(sbTempResult.toString(), String.valueOf(Math.pow(Double.valueOf(currentNumber), 0.5)));
-        }
+        updateUI(sbTempResult.toString(), String.valueOf(Math.pow(Double.valueOf(currentNumber), 0.5)));
     }
 
     public void signChanger(String currentNumber) {
-        if (!currentNumber.equals("") && !currentNumber.equals(".")) {
-            updateUI(sbTempResult.toString(), String.valueOf(Double.valueOf(currentNumber)*-1));
-        }
+        updateUI(sbTempResult.toString(), String.valueOf(Double.valueOf(currentNumber) * -1));
     }
 
 
     public void percent(String currentNumber) {
-        if (!currentNumber.equals("") && !currentNumber.equals(".")) {
-            updateUI(sbTempResult.toString(), String.valueOf(Double.valueOf(currentNumber) * currentTempResult / 100));
-        }
+        updateUI(sbTempResult.toString(), String.valueOf(Double.valueOf(currentNumber) * currentTempResult / 100));
     }
 
     public void backspace(String currentNumber) {
-        // Log.wtf("myTag", Utils.trace(Thread.currentThread().getStackTrace()));
-        if (!currentNumber.equals("")) {
             activity.setResult(currentNumber.substring(0, currentNumber.length() - 1));
-        }
     }
 
     public void clear() {
@@ -136,14 +108,12 @@ public class MainActivityPresenter {
     }
 
     public void result(String currentNumber) {
-        if (!currentNumber.equals("") && !currentNumber.equals(".")) {
-            Log.wtf("myTAG", "" + currentTempResult + "   " + currentNumber);
-            currentTempResult = operation.action(currentTempResult, Double.valueOf(currentNumber));
-            sbTempResult.append(currentNumber).append(" = ").append(currentTempResult);
-            operation = Operation.SUM;
-            updateUI(sbTempResult.toString(), String.valueOf(currentTempResult - (int) currentTempResult < 0.00001 ? (int) currentTempResult : currentTempResult));
-        }
+        currentTempResult = operation.action(currentTempResult, Double.valueOf(currentNumber));
+        sbTempResult.append(currentNumber).append(" = ").append(currentTempResult);
+        operation = Operation.SUM;
+        updateUI(sbTempResult.toString(), String.valueOf(currentTempResult - (int) currentTempResult < 0.00001 ? (int) currentTempResult : currentTempResult));
     }
+
 
     private void updateUI(String tempResult, String result) {
         activity.setTempResult(tempResult);
