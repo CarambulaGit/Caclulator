@@ -8,117 +8,38 @@ import android.widget.Button;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity implements IMainActivity, View.OnClickListener {
-    private TextView tvResult;
-    private TextView tvTempResult;
-    private Button bBackspace;
-    private Button bClear;
-    private Button bRemoveCurrentNumber;
 
-    private Button bDivision;
-    private Button bDifference;
-    private Button bMultiply;
-    private Button bSum;
-    private Button bPercent;
-    private Button bReverse;
-    private Button bSquare;
-    private Button bRadical;
-    private Button bSignChanger;
-
-    private Button bOne;
-    private Button bTwo;
-    private Button bThree;
-    private Button bFour;
-    private Button bFive;
-    private Button bSix;
-    private Button bSeven;
-    private Button bEight;
-    private Button bNine;
-    private Button bZero;
-
-    private Button bDot;
-    private Button bResult;
+public class MainActivity extends AppCompatActivity implements IMainActivity {
+    @BindView(R.id.tvResult)
+    TextView tvResult;
+    @BindView(R.id.tvTempResult)
+    TextView tvTempResult;
+    @BindView(R.id.sType)
+    Switch sType;
 
     private MainActivityPresenter presenter;
-    private boolean isResult;
+    public boolean isResult;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initViewElements();
+        ButterKnife.bind(this);
         presenter = new MainActivityPresenter(this);
-        addOnClickListenerForButton();
-    }
-
-    private void addOnClickListenerForButton() {
-        bBackspace.setOnClickListener(this);
-        bClear.setOnClickListener(this);
-        bOne.setOnClickListener(this);
-        bTwo.setOnClickListener(this);
-        bThree.setOnClickListener(this);
-        bSum.setOnClickListener(this);
-        bFour.setOnClickListener(this);
-        bFive.setOnClickListener(this);
-        bSix.setOnClickListener(this);
-        bDifference.setOnClickListener(this);
-        bSeven.setOnClickListener(this);
-        bEight.setOnClickListener(this);
-        bNine.setOnClickListener(this);
-        bDivision.setOnClickListener(this);
-        bZero.setOnClickListener(this);
-        bDot.setOnClickListener(this);
-        bResult.setOnClickListener(this);
-        bPercent.setOnClickListener(this);
-        bReverse.setOnClickListener(this);
-        bSquare.setOnClickListener(this);
-        bRadical.setOnClickListener(this);
-        bRemoveCurrentNumber.setOnClickListener(this);
-        bSignChanger.setOnClickListener(this);
-        bMultiply.setOnClickListener(this);
-    }
-
-
-    private void initViewElements() {
-        tvResult = findViewById(R.id.tvResult);
-        tvTempResult = findViewById(R.id.tvTempResult);
-        bBackspace = findViewById(R.id.bBackspace);
-        bClear = findViewById(R.id.bClear);
-        bRemoveCurrentNumber = findViewById(R.id.bRemoveCurrentNumber);
-        bOne = findViewById(R.id.bOne);
-        bTwo = findViewById(R.id.bTwo);
-        bThree = findViewById(R.id.bThree);
-        bSum = findViewById(R.id.bSum);
-        bFour = findViewById(R.id.bFour);
-        bFive = findViewById(R.id.bFive);
-        bSix = findViewById(R.id.bSix);
-        bDifference = findViewById(R.id.bDifference);
-        bSeven = findViewById(R.id.bSeven);
-        bEight = findViewById(R.id.bEight);
-        bNine = findViewById(R.id.bNine);
-        bDivision = findViewById(R.id.bDivision);
-        bZero = findViewById(R.id.bZero);
-        bDot = findViewById(R.id.bDot);
-        bResult = findViewById(R.id.bResult);
-        bMultiply = findViewById(R.id.bMultiply);
-        bPercent = findViewById(R.id.bPercent);
-        bReverse = findViewById(R.id.bReverse);
-        bSquare = findViewById(R.id.bSquare);
-        bRadical = findViewById(R.id.bRadical);
-        bSignChanger = findViewById(R.id.bSignChanger);
     }
 
     @Override
     public void setTempResult(String tempResult) {
-        // Log.wtf("myTag", Utils.trace(Thread.currentThread().getStackTrace()));
         tvTempResult.setText(tempResult);
     }
 
     @Override
     public void setResult(String result) {
-        // Log.wtf("myTag", Utils.trace(Thread.currentThread().getStackTrace()));
         tvResult.setText(result);
     }
 
@@ -133,141 +54,140 @@ public class MainActivity extends AppCompatActivity implements IMainActivity, Vi
         Log.wtf("myTAG", log);
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.bBackspace:
-                try {
-                    presenter.backspace(tvResult.getText().toString());
-                } catch (Exception error) {
-                    isResult = true;
-                }
-                break;
-            case R.id.bClear:
-                presenter.clear();
-                break;
-            case R.id.bRemoveCurrentNumber:
-                presenter.remove();
-                break;
-            case R.id.bSum:
-                try {
-                    presenter.sum(tvResult.getText().toString());
-                } catch (Exception error) {
-                    tvResult.setText("Error");
-                    isResult = true;
-                }
-                break;
-            case R.id.bDivision:
-                try {
-                    presenter.division(tvResult.getText().toString());
-                } catch (Exception error) {
-                    tvResult.setText("Error");
-                    isResult = true;
-                }
-                break;
-            case R.id.bDifference:
-                try {
-                    presenter.difference(tvResult.getText().toString());
-                } catch (Exception error) {
-                    tvResult.setText("Error");
-                    isResult = true;
-                }
-                break;
-            case R.id.bMultiply:
-                try {
-                    presenter.multiply(tvResult.getText().toString());
-                } catch (Exception error) {
-                    tvResult.setText("Error");
-                    isResult = true;
-                }
-                break;
-            case R.id.bReverse:
-                try {
-                    presenter.reverse(tvResult.getText().toString());
-                } catch (Exception error) {
-                    tvResult.setText("Error");
-                    isResult = true;
-                }
-                break;
-            case R.id.bSquare:
-                try {
-                    presenter.square(tvResult.getText().toString());
-                } catch (Exception error) {
-                    tvResult.setText("Error");
-                    isResult = true;
-                }
-                break;
-            case R.id.bRadical:
-                try {
-                    presenter.radical(tvResult.getText().toString());
-                } catch (Exception error) {
-                    tvResult.setText("Error");
-                    isResult = true;
-                }
-                break;
-            case R.id.bPercent:
-                try {
-                    presenter.percent(tvResult.getText().toString());
-                } catch (Exception error) {
-                    tvResult.setText("Error");
-                    isResult = true;
-                }
-                break;
-            case R.id.bSignChanger:
-                try {
-                    presenter.signChanger(tvResult.getText().toString());
-                } catch (Exception error) {
-                    tvResult.setText("Error");
-                    isResult = true;
-                }
-                break;
-            case R.id.bOne:
-                clickOnNumber("1");
-                break;
-            case R.id.bTwo:
-                clickOnNumber("2");
-                break;
-            case R.id.bThree:
-                clickOnNumber("3");
-                break;
-            case R.id.bFour:
-                clickOnNumber("4");
-                break;
-            case R.id.bFive:
-                clickOnNumber("5");
-                break;
-            case R.id.bSix:
-                clickOnNumber("6");
-                break;
-            case R.id.bSeven:
-                clickOnNumber("7");
-                break;
-            case R.id.bEight:
-                clickOnNumber("8");
-                break;
-            case R.id.bNine:
-                clickOnNumber("9");
-                break;
-            case R.id.bZero:
-                clickOnNumber("0");
-                break;
-            case R.id.bDot:
-                if (isResult) {
-                    clearResult();
-                    isResult = false;
-                }
-                if (tvResult.getText().toString().contains(".")) return;
-                tvResult.setText(tvResult.getText() + ".");
-                break;
-            case R.id.bResult:
-                try {
-                    presenter.sum(tvResult.getText().toString());
-                } catch (Exception error) {
-                    tvResult.setText("Error");
-                }
-                isResult = true;
-                break;
+    @OnClick(R.id.bBackspace)
+    public void bBackspaceOnClick(View view) {
+        presenter.backspace(tvResult.getText().toString());
+    }
 
+    @OnClick(R.id.bClear)
+    public void bClearOnClick(View view) {
+        presenter.clear();
+    }
+
+    @OnClick(R.id.bRemoveCurrentNumber)
+    public void bRemoveCurrentNumberOnClick(View view) {
+        presenter.remove();
+    }
+
+    @OnClick(R.id.bSum)
+    public void bSumOnClick(View view) {
+        isResult = presenter.sum(tvResult.getText().toString());
+    }
+
+    @OnClick(R.id.bDivision)
+    public void bDivisionOnClick(View view) {
+        isResult = presenter.division(tvResult.getText().toString());
+    }
+
+    @OnClick(R.id.bDifference)
+    public void bDifferenceOnClick(View view) {
+        isResult = presenter.difference(tvResult.getText().toString());
+    }
+
+    @OnClick(R.id.bMultiply)
+    public void bMultiplyOnClick(View view) {
+        isResult = presenter.multiply(tvResult.getText().toString());
+    }
+
+    @OnClick(R.id.bReverse)
+    public void bReverseOnClick(View view) {
+        isResult = presenter.reverse(tvResult.getText().toString());
+    }
+
+    @OnClick(R.id.bSquare)
+    public void bSquareOnClick(View view) {
+        isResult = presenter.square(tvResult.getText().toString());
+    }
+
+    @OnClick(R.id.bRadical)
+    public void bRadicalOnClick(View view) {
+        isResult = presenter.radical(tvResult.getText().toString());
+    }
+
+    @OnClick(R.id.bPercent)
+    public void bPercentOnClick(View view) {
+        isResult = presenter.percent(tvResult.getText().toString());
+    }
+
+    @OnClick(R.id.bSignChanger)
+    public void bSignChangerOnClick(View view) {
+        isResult = presenter.signChanger(tvResult.getText().toString());
+    }
+
+    @OnClick(R.id.bOne)
+    public void bOneOnClick(View view) {
+        clickOnNumber("1");
+    }
+
+    @OnClick(R.id.bTwo)
+    public void bTwoOnClick(View view) {
+        clickOnNumber("2");
+    }
+
+    @OnClick(R.id.bThree)
+    public void bThreeOnClick(View view) {
+        clickOnNumber("3");
+    }
+
+    @OnClick(R.id.bFour)
+    public void bFourOnClick(View view) {
+        clickOnNumber("4");
+    }
+
+    @OnClick(R.id.bFive)
+    public void bFiveOnClick(View view) {
+        clickOnNumber("5");
+    }
+
+    @OnClick(R.id.bSix)
+    public void bSixOnClick(View view) {
+        clickOnNumber("6");
+    }
+
+    @OnClick(R.id.bSeven)
+    public void bSevenOnClick(View view) {
+        clickOnNumber("7");
+    }
+
+    @OnClick(R.id.bEight)
+    public void bEightOnClick(View view) {
+        clickOnNumber("8");
+    }
+
+    @OnClick(R.id.bNine)
+    public void bNineOnClick(View view) {
+        clickOnNumber("9");
+    }
+
+    @OnClick(R.id.bZero)
+    public void bZeroOnClick(View view) {
+        clickOnNumber("0");
+    }
+
+    @OnClick(R.id.bDot)
+    public void bDotOnClick(View view) {
+        if (isResult) {
+            clearResult();
+            isResult = false;
+        }
+        if (tvResult.getText().toString().contains(".")) return;
+        tvResult.setText(tvResult.getText() + ".");
+    }
+
+    @OnClick(R.id.bResult)
+    public void bResultOnClick(View view) {
+        presenter.result(tvResult.getText().toString());
+        isResult = true;
+    }
+
+    @OnClick(R.id.sType)
+    public void sTypeOnClick(View view) {
+        if (sType.isChecked()) {
+            setContentView(R.layout.advanced_caclulator);
+            presenter = new MainActivityPresenter(this);
+        } else {
+            setContentView(R.layout.activity_main);
+            presenter = new MainActivityPresenter(this);
         }
     }
 
