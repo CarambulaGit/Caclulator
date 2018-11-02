@@ -35,12 +35,12 @@
         android:id="@+id/sType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/type"
         android:checked="true"
+        android:text="@string/type"
         app:layout_constraintTop_toBottomOf="@+id/tvResult" />
 
-    <TableLayout
-        android:id="@+id/tlNumbersAndActions"
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/clNumbersAndActions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
@@ -48,212 +48,299 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent">
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="1dp">
+        <Button
+            android:id="@+id/bPower"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:text="@string/power"
+            app:layout_constraintLeft_toRightOf="@+id/bSquare" />
 
-            <Button
+        <Button
+            android:id="@+id/bSin"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:text="@string/sin"
+            app:layout_constraintLeft_toRightOf="@+id/bPower" />
 
-            />
+        <Button
+            android:id="@+id/bCos"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:text="@string/cos"
+            app:layout_constraintLeft_toRightOf="@+id/bSin" />
 
-            <Button
-                android:id="@+id/bPercent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="%" />
+        <Button
+            android:id="@+id/bTan"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:text="@string/tan"
+            app:layout_constraintLeft_toRightOf="@+id/bCos" />
 
-            <Button
-                android:id="@+id/bRadical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/radical" />
+        <Button
+            android:id="@+id/bTenInPower"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:text="@string/tenInPowerOfCurrentNumber"
+            app:layout_constraintBottom_toTopOf="@+id/bDivision"
+            app:layout_constraintRight_toLeftOf="@+id/bLog" />
 
-            <Button
-                android:id="@+id/bSquare"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/square" />
+        <Button
+            android:id="@+id/bLog"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:text="@string/log"
+            app:layout_constraintBottom_toTopOf="@+id/bDivision"
+            app:layout_constraintRight_toLeftOf="@+id/bExp" />
 
-            <Button
-                android:id="@+id/bReverse"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/reverse" />
-        </TableRow>
+        <Button
+            android:id="@+id/bExp"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:text="@string/exp"
+            app:layout_constraintBottom_toTopOf="@+id/bDivision"
+            app:layout_constraintRight_toLeftOf="@+id/bMod" />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="1dp">
+        <Button
+            android:id="@+id/bMod"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:text="@string/mod"
+            app:layout_constraintBottom_toTopOf="@+id/bDivision"
+            app:layout_constraintRight_toRightOf="parent" />
 
-            <Button />
+        <Button
+            android:id="@+id/bRadical"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:text="@string/radical"
+            app:layout_constraintBottom_toTopOf="@+id/bClear" />
 
-            <Button
-                android:id="@+id/bRemoveCurrentNumber"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/removeCurrentNumber" />
+        <Button
+            android:id="@+id/bSquare"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:text="@string/square"
+            app:layout_constraintBottom_toTopOf="@+id/bRadical"
+            app:layout_constraintLeft_toLeftOf="parent" />
 
-            <Button
-                android:id="@+id/bClear"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/clear" />
+        <Button
+            android:id="@+id/bSecond"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:text="@string/second"
+            app:layout_constraintBaseline_toBaselineOf="@+id/bRemoveCurrentNumber" />
 
-            <Button
-                android:id="@+id/bBackspace"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/backspace" />
+        <Button
+            android:id="@+id/bRemoveCurrentNumber"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:text="@string/removeCurrentNumber"
+            app:layout_constraintStart_toEndOf="@+id/bSecond"
+            app:layout_constraintTop_toTopOf="@+id/bClear" />
 
-            <Button
-                android:id="@+id/bDivision"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/division" />
-        </TableRow>
+        <Button
+            android:id="@+id/bClear"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:text="@string/clear"
+            app:layout_constraintBaseline_toBaselineOf="@+id/bBackspace"
+            app:layout_constraintStart_toEndOf="@+id/bRemoveCurrentNumber" />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="1dp">
+        <Button
+            android:id="@+id/bBackspace"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:text="@string/backspace"
+            app:layout_constraintBaseline_toBaselineOf="@+id/bDivision"
+            app:layout_constraintStart_toEndOf="@+id/bClear" />
 
-            <Button />
+        <Button
+            android:id="@+id/bDivision"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="@string/division"
+            app:layout_constraintStart_toEndOf="@+id/bBackspace"
+            app:layout_constraintTop_toBottomOf="@+id/bSquare" />
 
-            <Button
-                android:id="@+id/bSeven"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@android:color/background_light"
-                android:text="@string/seven" />
 
-            <Button
-                android:id="@+id/bEight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@android:color/background_light"
-                android:text="@string/eight" />
+        <Button
+            android:id="@+id/button9"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBaseline_toBaselineOf="@+id/bSeven"
+            app:layout_constraintStart_toStartOf="@+id/bSecond" />
 
-            <Button
-                android:id="@+id/bNine"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@android:color/background_light"
-                android:text="@string/nine" />
+        <Button
+            android:id="@+id/bSeven"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/background_light"
+            android:text="@string/seven"
+            app:layout_constraintStart_toEndOf="@+id/button9"
+            app:layout_constraintTop_toTopOf="@+id/bEight" />
 
-            <Button
-                android:id="@+id/bMultiply"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/multiply" />
-        </TableRow>
+        <Button
+            android:id="@+id/bEight"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/background_light"
+            android:text="@string/eight"
+            app:layout_constraintBaseline_toBaselineOf="@+id/bNine"
+            app:layout_constraintStart_toEndOf="@+id/bSeven" />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="1dp">
+        <Button
+            android:id="@+id/bNine"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/background_light"
+            android:text="@string/nine"
+            app:layout_constraintBaseline_toBaselineOf="@+id/bMultiply"
+            app:layout_constraintStart_toEndOf="@+id/bEight" />
 
-            <Button />
+        <Button
+            android:id="@+id/bMultiply"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="@string/multiply"
+            app:layout_constraintStart_toEndOf="@+id/bNine"
+            app:layout_constraintTop_toBottomOf="@+id/bBackspace" />
 
-            <Button
-                android:id="@+id/bFour"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@android:color/background_light"
-                android:text="@string/four" />
 
-            <Button
-                android:id="@+id/bFive"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@android:color/background_light"
-                android:text="@string/five" />
+        <Button
+            android:id="@+id/button10"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBaseline_toBaselineOf="@+id/bFour"
+            app:layout_constraintStart_toStartOf="@+id/button9" />
 
-            <Button
-                android:id="@+id/bSix"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@android:color/background_light"
-                android:text="@string/six" />
+        <Button
+            android:id="@+id/bFour"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/background_light"
+            android:text="@string/four"
+            app:layout_constraintStart_toEndOf="@+id/button10"
+            app:layout_constraintTop_toTopOf="@+id/bFive" />
 
-            <Button
-                android:id="@+id/bDifference"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/difference" />
-        </TableRow>
+        <Button
+            android:id="@+id/bFive"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/background_light"
+            android:text="@string/five"
+            app:layout_constraintBaseline_toBaselineOf="@+id/bSix"
+            app:layout_constraintStart_toEndOf="@+id/bFour" />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="1dp">
+        <Button
+            android:id="@+id/bSix"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/background_light"
+            android:text="@string/six"
+            app:layout_constraintBaseline_toBaselineOf="@+id/bDifference"
+            app:layout_constraintStart_toEndOf="@+id/bFive" />
 
-            <Button />
+        <Button
+            android:id="@+id/bDifference"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="@string/difference"
+            app:layout_constraintStart_toEndOf="@+id/bSix"
+            app:layout_constraintTop_toBottomOf="@+id/bNine" />
 
-            <Button
-                android:id="@+id/bOne"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@android:color/background_light"
-                android:baselineAligned="false"
-                android:text="@string/one" />
 
-            <Button
-                android:id="@+id/bTwo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@android:color/background_light"
-                android:text="@string/two" />
+        <Button
+            android:id="@+id/bOpeningBracket"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:text="@string/openingBracket"
+            app:layout_constraintBaseline_toBaselineOf="@+id/bOne"
+            app:layout_constraintStart_toStartOf="@+id/button12" />
 
-            <Button
-                android:id="@+id/bThree"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@android:color/background_light"
-                android:text="@string/three" />
+        <Button
+            android:id="@+id/bOne"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/background_light"
+            android:baselineAligned="false"
+            android:text="@string/one"
+            app:layout_constraintEnd_toStartOf="@+id/bTwo"
+            app:layout_constraintTop_toTopOf="@+id/bTwo" />
 
-            <Button
-                android:id="@+id/bSum"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/sum" />
-        </TableRow>
+        <Button
+            android:id="@+id/bTwo"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/background_light"
+            android:text="@string/two"
+            app:layout_constraintBaseline_toBaselineOf="@+id/bThree"
+            app:layout_constraintStart_toEndOf="@+id/bOne" />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="1dp">
+        <Button
+            android:id="@+id/bThree"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/background_light"
+            android:text="@string/three"
+            app:layout_constraintBaseline_toBaselineOf="@+id/bSum"
+            app:layout_constraintStart_toEndOf="@+id/bTwo" />
 
-            <Button />
+        <Button
+            android:id="@+id/bSum"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="@string/sum"
+            app:layout_constraintTop_toBottomOf="@+id/bSix"
+            app:layout_constraintRight_toRightOf="parent"/>
 
-            <Button
-                android:id="@+id/bSignChanger"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/signChanger" />
 
-            <Button
-                android:id="@+id/bZero"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@android:color/background_light"
-                android:text="@string/zero" />
+        <Button
+            android:id="@+id/button12"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="1dp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/bZero"
+            app:layout_constraintStart_toStartOf="parent" />
 
-            <Button
-                android:id="@+id/bDot"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/dot" />
+        <Button
+            android:id="@+id/bSignChanger"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="@string/signChanger" />
 
-            <Button
-                android:id="@+id/bResult"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/result" />
+        <Button
+            android:id="@+id/bZero"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/background_light"
+            android:text="@string/zero"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bTwo" />
 
-        </TableRow>
+        <Button
+            android:id="@+id/bDot"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:text="@string/dot"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/bResult" />
 
-    </TableLayout>
+        <Button
+            android:id="@+id/bResult"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:text="@string/result"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+
+    </android.support.constraint.ConstraintLayout>
 
 </android.support.constraint.ConstraintLayout>
