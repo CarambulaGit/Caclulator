@@ -1,8 +1,6 @@
 package com.example.carambula.caclulator;
 
 
-import android.util.Log;
-
 public class MainActivityPresenter {
     private IMainActivity activity;
     private double currentTempResult;
@@ -42,58 +40,114 @@ public class MainActivityPresenter {
         sbTempResult = new StringBuilder();
     }
 
-    public void sum(String currentNumber) {
-        sbTempResult.append(currentNumber).append(" + ");
-        currentTempResult = operation.action(currentTempResult, Double.valueOf(currentNumber));
-        updateUI(sbTempResult.toString(), "");
-        operation = Operation.SUM;
-
+    public boolean sum(String currentNumber) {
+        try {
+            sbTempResult.append(currentNumber).append(" + ");
+            currentTempResult = operation.action(currentTempResult, Double.valueOf(currentNumber));
+            updateUI(sbTempResult.toString(), "");
+            operation = Operation.SUM;
+            return false;
+        } catch (Exception e) {
+            activity.setResult("Error");
+            return true;
+        }
     }
 
-    public void division(String currentNumber) {
-        sbTempResult.append(currentNumber).append(" / ");
-        currentTempResult = operation.action(currentTempResult, Double.valueOf(currentNumber));
-        updateUI(sbTempResult.toString(), "");
-        operation = Operation.DIVISION;
+    public boolean division(String currentNumber) {
+        try {
+            sbTempResult.append(currentNumber).append(" / ");
+            currentTempResult = operation.action(currentTempResult, Double.valueOf(currentNumber));
+            updateUI(sbTempResult.toString(), "");
+            operation = Operation.DIVISION;
+            return false;
+        } catch (Exception e) {
+            activity.setResult("Error");
+            return true;
+        }
     }
 
-    public void difference(String currentNumber) {
-        sbTempResult.append(currentNumber).append(" - ");
-        currentTempResult = operation.action(currentTempResult, Double.valueOf(currentNumber));
-        updateUI(sbTempResult.toString(), "");
-        operation = Operation.DIFFERENCE;
+    public boolean difference(String currentNumber) {
+        try {
+            sbTempResult.append(currentNumber).append(" - ");
+            currentTempResult = operation.action(currentTempResult, Double.valueOf(currentNumber));
+            updateUI(sbTempResult.toString(), "");
+            operation = Operation.DIFFERENCE;
+            return false;
+        } catch (Exception e) {
+            activity.setResult("Error");
+            return true;
+        }
     }
 
-    public void multiply(String currentNumber) {
-        sbTempResult.append(currentNumber).append(" * ");
-        currentTempResult = operation.action(currentTempResult, Double.valueOf(currentNumber));
-        updateUI(sbTempResult.toString(), "");
-        operation = Operation.MULTIPLY;
+    public boolean multiply(String currentNumber) {
+        try {
+            sbTempResult.append(currentNumber).append(" * ");
+            currentTempResult = operation.action(currentTempResult, Double.valueOf(currentNumber));
+            updateUI(sbTempResult.toString(), "");
+            operation = Operation.MULTIPLY;
+            return false;
+        } catch (Exception e) {
+            activity.setResult("Error");
+            return true;
+        }
     }
 
-    public void reverse(String currentNumber) {
-        updateUI(sbTempResult.toString(), String.valueOf(1 / Double.valueOf(currentNumber)));
+    public boolean reverse(String currentNumber) {
+        try {
+            updateUI(sbTempResult.toString(), String.valueOf(1 / Double.valueOf(currentNumber)));
+            return false;
+        } catch (Exception e) {
+            activity.setResult("Error");
+            return true;
+        }
     }
 
-    public void square(String currentNumber) {
-        updateUI(sbTempResult.toString(), String.valueOf(Math.pow(Double.valueOf(currentNumber), 2)));
+    public boolean square(String currentNumber) {
+        try {
+            updateUI(sbTempResult.toString(), String.valueOf(Math.pow(Double.valueOf(currentNumber), 2)));
+            return false;
+        } catch (Exception e) {
+            activity.setResult("Error");
+            return true;
+        }
     }
 
-    public void radical(String currentNumber) {
-        updateUI(sbTempResult.toString(), String.valueOf(Math.pow(Double.valueOf(currentNumber), 0.5)));
+    public boolean radical(String currentNumber) {
+        try {
+            updateUI(sbTempResult.toString(), String.valueOf(Math.pow(Double.valueOf(currentNumber), 0.5)));
+            return false;
+        } catch (Exception e) {
+            activity.setResult("Error");
+            return true;
+        }
     }
 
-    public void signChanger(String currentNumber) {
-        updateUI(sbTempResult.toString(), String.valueOf(Double.valueOf(currentNumber) * -1));
+    public boolean signChanger(String currentNumber) {
+        try {
+            updateUI(sbTempResult.toString(), String.valueOf(Double.valueOf(currentNumber) * -1));
+            return false;
+        } catch (Exception e) {
+            activity.setResult("Error");
+            return true;
+        }
     }
 
 
-    public void percent(String currentNumber) {
-        updateUI(sbTempResult.toString(), String.valueOf(Double.valueOf(currentNumber) * currentTempResult / 100));
+    public boolean percent(String currentNumber) {
+        try {
+            updateUI(sbTempResult.toString(), String.valueOf(Double.valueOf(currentNumber) * currentTempResult / 100));
+            return false;
+        } catch (Exception e) {
+            activity.setResult("Error");
+            return true;
+        }
     }
 
     public void backspace(String currentNumber) {
+        try {
             activity.setResult(currentNumber.substring(0, currentNumber.length() - 1));
+        } catch (Exception e) {
+        }
     }
 
     public void clear() {
@@ -108,10 +162,14 @@ public class MainActivityPresenter {
     }
 
     public void result(String currentNumber) {
-        currentTempResult = operation.action(currentTempResult, Double.valueOf(currentNumber));
-        sbTempResult.append(currentNumber).append(" = ").append(currentTempResult);
-        operation = Operation.SUM;
-        updateUI(sbTempResult.toString(), String.valueOf(currentTempResult - (int) currentTempResult < 0.00001 ? (int) currentTempResult : currentTempResult));
+        try {
+            currentTempResult = operation.action(currentTempResult, Double.valueOf(currentNumber));
+            sbTempResult.append(currentNumber).append(" = ").append(currentTempResult);
+            operation = Operation.SUM;
+            updateUI(sbTempResult.toString(), String.valueOf(currentTempResult));
+        } catch (Exception e) {
+            activity.setResult("Error");
+        }
     }
 
 
