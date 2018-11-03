@@ -183,7 +183,7 @@ public class MainActivity extends AppCompatActivity implements IMainActivity {
     @OnClick(R.id.sType)
     public void sTypeOnClick(View view) {
         if (sType.isChecked()) {
-            setContentView(R.layout.advanced_caclulator);
+            setContentView(R.layout.advanced_caclulator_linearlayout);
             presenter = new MainActivityPresenter(this);
         } else {
             setContentView(R.layout.activity_main);

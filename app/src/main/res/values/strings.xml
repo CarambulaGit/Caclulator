@@ -16,7 +16,7 @@
     <string name="three">3</string>
     <string name="two">2</string>
     <string name="one">1</string>
-    <string name="type">type</string>
+    <string name="type">Type</string>
     <string name="clear">C</string>
     <string name="backspace">⌫</string>
     <string name="signChanger">±</string>
@@ -24,5 +24,19 @@
     <string name="radical">√</string>
     <string name="square">ꭕ²</string>
     <string name="reverse">1/x</string>
+    <string name="mod">Mod</string>
+    <string name="exp">Exp</string>
+    <string name="log">log</string>
+    <string name="tenInPowerOfCurrentNumber">10^x</string>
+    <string name="power">x^y</string>
+    <string name="sin">sin</string>
+    <string name="cos">cos</string>
+    <string name="tan">tan</string>
+    <string name="second">2nd</string>
+    <string name="openingBracket">(</string>
+    <string name="pi">pi</string>
+    <string name="factorial">n!</string>
+    <string name="openBracket">(</string>
+    <string name="closeBracket">)</string>
 
 </resources>
